@@ -47,6 +47,12 @@ def todts(
         writable=True,
         help="Output directory for device tree source files. Default is the same directory as the input file.",
     ),
+    fix_strings: bool = typer.Option(
+        False,
+        "--fix-strings",
+        "-s",
+        help="Fix multi-entry strings in the device tree source files",
+    ),
 ):
     DTC_ARGS = ["dtc", "-qI", "dtb", "-O", "dts", "-@", "-H", "epapr", "-o"]
 
@@ -70,7 +76,14 @@ def todts(
             carryon: str = console.input(prompt="Continue? [Y/N] ", emoji=False)
             if carryon.lower() != "y":
                 raise typer.Abort()
-        console.print(" OK", style="bold green")
+
+        if fix_strings:
+            dts = outfile.read_text()
+            dts = dts.replace("\\0", '", "')
+            outfile.write_text(dts)
+            console.print(" [bold green]OK[/] (fixed strings)")
+        else:
+            console.print(" OK", style="bold green")
 
 
 @app.command()
