@@ -64,9 +64,7 @@ def todts(
         elif outpath.is_file() and len(infile) == 1:
             outfile = outpath
         else:
-            raise typer.BadParameter(
-                "Output path must be a directory if more than one input file is specified."
-            )
+            raise typer.BadParameter("If output path is a file, only one input file can be specified")
 
         try:
             console.print(f"Converting [bold blue]{path}[/] to [bold yellow]{outfile}[/] ...", end="")
