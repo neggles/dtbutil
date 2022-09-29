@@ -230,3 +230,7 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/linux,windows,macos,visualstudiocode,python
 
 src/dtbutil/_version.py
+
+# misc and temp
+/misc/
+/temp/
