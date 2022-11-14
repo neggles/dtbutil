@@ -1,10 +1,8 @@
-import readline
 import subprocess
 from pathlib import Path
 from typing import List, Optional
 
 import typer
-from rich.text import Text
 
 from dtbutil import __version__
 from dtbutil.console import console, err_console
@@ -24,7 +22,6 @@ def callback(
         None, "--version", "-v", callback=version_callback, is_eager=True, help="Show version"
     ),
 ):
-    readline.parse_and_bind("tab: complete")
     pass
 
 
